@@ -56,11 +56,30 @@ Jogo.prototype.analisarLancamento = function(lancamento){
 	else if ( contagem.find(e => e === 4) )
 		resultado = POKER;
 	else if ( contagem.find(e => e === 3) && contagem.find(e =>e ===2) )
-		resultado = GENERALA;
+		resultado = FULL;
 	else 
 		resultado = NADA;
 	return resultado;
+}
+	
+Jogo.prototype.novoLancamento = function(){
+	console.log('model: novoLancamento');
+	var lancamento = this.lancarDados();
+	console.log('model: analisarLancamento');
+	var analisarLancamento = this.analisarLancamento(lancamento);
+	this.pontos += analisarLancamento.pontos;
+	this.n += 1;
+	console.log('model: prepara resultado');
 
+	var resultado = {
+		pontosAcumulados : this.pontos,
+		nLancamentos : this.n,
+		lancamento : lancamento,
+		jogoLancamento : analisarLancamento.jogo,
+		pontosLancamento : analisarLancamento.pontos
+	};
+
+	return resultado;
 }
 
 
