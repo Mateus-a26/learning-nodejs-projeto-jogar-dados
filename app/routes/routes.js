@@ -7,7 +7,6 @@ module.exports = function(application){
 	application.get('/iniciar' ,function(req,res){
 		console.log('routes: /iniciar');
 		application.app.controllers.jogo.iniciar(application,req,res);
-		//res.send('Esta funcionalidade não foi implementada ainda');
 	});
 
 	application.get('/lancarDados', function(req,res){
@@ -17,11 +16,11 @@ module.exports = function(application){
 
 	application.get('/reiniciar', function(req,res){
 		console.log('routes: /reiniciar');
-		res.send('esta funcionalidade não foi implementada ainda.');
+		application.app.controllers.jogo.reiniciar(application, req, res);
 	});
 
 	application.get('/encerrar', function(req,res){
 		console.log('routes: /encerrar');
-		res.send('esta funcionalidade não foi implementada ainda.');
+		application.app.controllers.jogo.encerrar(application, req, res);
 	});
 }
