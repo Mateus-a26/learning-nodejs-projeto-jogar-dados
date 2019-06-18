@@ -4,6 +4,7 @@ function Jogo(dados = 5,lados = 6){
 	this.lados = lados;
 	this.pontos = 0;
 	this.n = 0;
+	this.contSemJogo = 0;
 }
 
 Jogo.prototype.novoJogo = function(){
@@ -52,7 +53,6 @@ Jogo.prototype.analisarLancamento = function(lancamento){
 
 	if ( contagem.find(e => e === 5) )
 		resultado = GENERALA;
-
 	else if ( contagem.find(e => e === 4) )
 		resultado = POKER;
 	else if ( contagem.find(e => e === 3) && contagem.find(e =>e ===2) )
@@ -61,6 +61,8 @@ Jogo.prototype.analisarLancamento = function(lancamento){
 		resultado = NADA;
 	return resultado;
 }
+
+
 	
 Jogo.prototype.novoLancamento = function(){
 	console.log('model: novoLancamento');
@@ -68,7 +70,19 @@ Jogo.prototype.novoLancamento = function(){
 	console.log('model: analisarLancamento');
 	var analisarLancamento = this.analisarLancamento(lancamento);
 	this.pontos += analisarLancamento.pontos;
+
+
 	this.n += 1;
+	if (analisarLancamento.pontos == 0)
+		this.contSemJogo += 1;
+	else
+		this.contSemJogo = 0;
+
+	msg = "";
+	// se o resto da divisão de contSemJogo por 5 for 0
+	if(this.contSemJogo > 0 && this.contSemJogo % 5 == 0 )
+		msg = "Voce esta sem sorte";
+
 	console.log('model: prepara resultado');
 
 	var resultado = {
@@ -76,7 +90,9 @@ Jogo.prototype.novoLancamento = function(){
 		nLancamentos : this.n,
 		lancamento : lancamento,
 		jogoLancamento : analisarLancamento.jogo,
-		pontosLancamento : analisarLancamento.pontos
+		pontosLancamento : analisarLancamento.pontos,
+		contSemJogo : this.contSemJogo,
+		msg : msg
 	};
 
 	return resultado;
