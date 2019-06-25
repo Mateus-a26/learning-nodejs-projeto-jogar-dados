@@ -71,17 +71,7 @@ Jogo.prototype.novoLancamento = function(){
 	var analisarLancamento = this.analisarLancamento(lancamento);
 	this.pontos += analisarLancamento.pontos;
 
-
-	this.n += 1;
-	if (analisarLancamento.pontos == 0)
-		this.contSemJogo += 1;
-	else
-		this.contSemJogo = 0;
-
-	msg = "";
-	// se o resto da divisão de contSemJogo por 5 for 0
-	if(this.contSemJogo > 0 && this.contSemJogo % 5 == 0 )
-		msg = "Voce esta sem sorte";
+	var interacao = this.interacao(analisarLancamento);
 
 	console.log('model: prepara resultado');
 
@@ -91,11 +81,49 @@ Jogo.prototype.novoLancamento = function(){
 		lancamento : lancamento,
 		jogoLancamento : analisarLancamento.jogo,
 		pontosLancamento : analisarLancamento.pontos,
+		contSemJogo : interacao.contSemJogo,
+		msg : interacao.msg
+		
+	};
+	/*this.n += 1;
+	if (analisarLancamento.pontos == 0)
+		this.contSemJogo += 1;
+	else
+		this.contSemJogo = 0;
+	msg = "";
+	// se o resto da divisão de contSemJogo por 5 for 0
+	if(this.contSemJogo > 0 && this.contSemJogo == 5 )
+		msg = "Voce esta sem sorte";
+	else if(this.contSemJogo > 0 && this.contSemJogo == 10 )
+		msg = "pqp se é muito rum";*/
+
+	return resultado;
+}
+
+Jogo.prototype.interacao = function(analisarLancamento){
+	console.log('model: interacao');
+	console.log('model: analisarLancamento');
+		this.n += 1;
+	if (analisarLancamento.pontos == 0)
+		this.contSemJogo += 1;
+	else
+		this.contSemJogo = 0;
+	msg = "";
+	// se o resto da divisão de contSemJogo por 5 for 0
+	if(this.contSemJogo > 0 && this.contSemJogo == 5 )
+		msg = "Nada ainda ? Voce esta sem sorte :(";
+	else if(this.contSemJogo > 0 && this.contSemJogo == 10 )
+		msg = "Realmente hoje não é o seu dia hehe...";
+
+
+	var resultado = {
 		contSemJogo : this.contSemJogo,
 		msg : msg
 	};
-
 	return resultado;
+
+
+	
 }
 
 

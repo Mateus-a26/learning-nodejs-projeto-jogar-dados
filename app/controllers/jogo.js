@@ -44,3 +44,5 @@ module.exports.novoLancamento = function(application,req,res){
 		jogoModel = undefined;
 		res.render('home');
 	}
+
+	
