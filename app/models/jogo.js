@@ -51,14 +51,28 @@ Jogo.prototype.analisarLancamento = function(lancamento){
 
 	var resultado;
 
-	if ( contagem.find(e => e === 5) )
+	if ( contagem.find(e => e === 5) ){
 		resultado = GENERALA;
-	else if ( contagem.find(e => e === 4) )
+	
+	this.pontuou = true;
+}
+	else if ( contagem.find(e => e === 4) ){
 		resultado = POKER;
-	else if ( contagem.find(e => e === 3) && contagem.find(e =>e ===2) )
+	
+	this.pontuou = true;
+	}
+
+	else if ( contagem.find(e => e === 3) && contagem.find(e =>e ===2) ){
 		resultado = FULL;
+	
+	this.pontuou = true;
+}
+
 	else 
 		resultado = NADA;
+	
+
+
 	return resultado;
 }
 
@@ -82,7 +96,8 @@ Jogo.prototype.novoLancamento = function(){
 		jogoLancamento : analisarLancamento.jogo,
 		pontosLancamento : analisarLancamento.pontos,
 		contSemJogo : interacao.contSemJogo,
-		msg : interacao.msg
+		msg : interacao.msg,
+		pontuou : this.pontuou
 		
 	};
 	/*this.n += 1;
@@ -114,17 +129,19 @@ Jogo.prototype.interacao = function(analisarLancamento){
 		msg = "Nada ainda ? Voce esta sem sorte :(";
 	else if(this.contSemJogo > 0 && this.contSemJogo == 10 )
 		msg = "Realmente hoje não é o seu dia hehe...";
-
-
+	else if(this.contSemJogo > 0 && this.contSemJogo == 15 )
+		msg = "Ja pensou em tentar fazer outra coisa?...";
+	else if(this.contSemJogo > 0 && this.contSemJogo == 20 )
+		msg = "Ta bom chega...va no google e pesquise:Jogo da velha";
 	var resultado = {
 		contSemJogo : this.contSemJogo,
 		msg : msg
 	};
 	return resultado;
 
-
 	
 }
+
 
 
 jogo = new Jogo();
