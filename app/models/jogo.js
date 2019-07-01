@@ -54,24 +54,22 @@ Jogo.prototype.analisarLancamento = function(lancamento){
 	if ( contagem.find(e => e === 5) ){
 		resultado = GENERALA;
 	
-	this.pontuou = true;
+	//this.pontuou = true;
 }
 	else if ( contagem.find(e => e === 4) ){
 		resultado = POKER;
 	
-	this.pontuou = true;
+	//this.pontuou = true;
 	}
 
 	else if ( contagem.find(e => e === 3) && contagem.find(e =>e ===2) ){
 		resultado = FULL;
 	
-	this.pontuou = true;
+	//this.pontuou = true;
 }
 
 	else 
 		resultado = NADA;
-	
-
 
 	return resultado;
 }
@@ -96,9 +94,8 @@ Jogo.prototype.novoLancamento = function(){
 		jogoLancamento : analisarLancamento.jogo,
 		pontosLancamento : analisarLancamento.pontos,
 		contSemJogo : interacao.contSemJogo,
-		msg : interacao.msg,
-		pontuou : this.pontuou
-		
+		msg : interacao.msg
+			
 	};
 	/*this.n += 1;
 	if (analisarLancamento.pontos == 0)
@@ -133,6 +130,8 @@ Jogo.prototype.interacao = function(analisarLancamento){
 		msg = "Ja pensou em tentar fazer outra coisa?...";
 	else if(this.contSemJogo > 0 && this.contSemJogo == 20 )
 		msg = "Ta bom chega...va no google e pesquise:Jogo da velha";
+	
+	
 	var resultado = {
 		contSemJogo : this.contSemJogo,
 		msg : msg
