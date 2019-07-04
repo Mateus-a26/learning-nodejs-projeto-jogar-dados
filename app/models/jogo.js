@@ -41,9 +41,9 @@ Jogo.prototype.contarDados = function(lancamento){
 
 
 const GENERALA = {jogo : 'Generala', pontos : 100}
-const POKER = {jogo : 'poker', pontos : 50}
+const POKER = {jogo : 'Poker', pontos : 50}
 const FULL = {jogo : 'Full', pontos : 30}
-const NADA = {jogo : 'Nenhum', pontos : 0}
+const NADA = {jogo : 'Nada', pontos : 0}
 
 Jogo.prototype.analisarLancamento = function(lancamento){
 
@@ -53,17 +53,20 @@ Jogo.prototype.analisarLancamento = function(lancamento){
 
 	if ( contagem.find(e => e === 5) ){
 		resultado = GENERALA;
+		
 	
 	//this.pontuou = true;
 }
 	else if ( contagem.find(e => e === 4) ){
 		resultado = POKER;
+		
 	
 	//this.pontuou = true;
 	}
 
 	else if ( contagem.find(e => e === 3) && contagem.find(e =>e ===2) ){
 		resultado = FULL;
+		
 	
 	//this.pontuou = true;
 }
@@ -83,7 +86,7 @@ Jogo.prototype.novoLancamento = function(){
 	var analisarLancamento = this.analisarLancamento(lancamento);
 	this.pontos += analisarLancamento.pontos;
 
-	var interacao = this.interacao(analisarLancamento);
+	var interacao = this.interacao2(analisarLancamento);
 
 	console.log('model: prepara resultado');
 
@@ -95,6 +98,7 @@ Jogo.prototype.novoLancamento = function(){
 		pontosLancamento : analisarLancamento.pontos,
 		contSemJogo : interacao.contSemJogo,
 		msg : interacao.msg
+		
 			
 	};
 	/*this.n += 1;
@@ -112,7 +116,7 @@ Jogo.prototype.novoLancamento = function(){
 	return resultado;
 }
 
-Jogo.prototype.interacao = function(analisarLancamento){
+/*Jogo.prototype.interacao = function(analisarLancamento){
 	console.log('model: interacao');
 	console.log('model: analisarLancamento');
 		this.n += 1;
@@ -122,14 +126,56 @@ Jogo.prototype.interacao = function(analisarLancamento){
 		this.contSemJogo = 0;
 	msg = "";
 	// se o resto da divisão de contSemJogo por 5 for 0
-	if(this.contSemJogo > 0 && this.contSemJogo == 5 )
-		msg = "Nada ainda ? Voce esta sem sorte :(";
-	else if(this.contSemJogo > 0 && this.contSemJogo == 10 )
+	if(this.contSemJogo == 5 )
+		msg = "Meu Deus Nada ainda ? Voce esta sem sorte :(";
+	else if(this.contSemJogo == 10 )
 		msg = "Realmente hoje não é o seu dia hehe...";
-	else if(this.contSemJogo > 0 && this.contSemJogo == 15 )
-		msg = "Ja pensou em tentar fazer outra coisa?...";
+	else if(this.contSemJogo == 15 )
+		msg = "Ja pensou em tentar fazer outra coisa?algo mais fácil...";
 	else if(this.contSemJogo > 0 && this.contSemJogo == 20 )
-		msg = "Ta bom chega...va no google e pesquise:Jogo da velha";
+		msg = "Ta bom chega...é melhos você jogar um jogo da velha, talvez você tenha mais chance de ganhar";
+	if (analisarLancamento.pontos != 0)
+		msg = "Parabéns!!!Foi merecido^^";
+
+
+	
+	
+	var resultado = {
+		contSemJogo : this.contSemJogo,
+		msg : msg
+	};
+	return resultado;
+
+	
+}*/
+Jogo.prototype.interacao2 = function(analisarLancamento){
+	console.log('model: interacao2');
+	console.log('model: analisarLancamento');
+		this.n += 1;
+	if (analisarLancamento.pontos == 0)
+		this.contSemJogo += 1;
+	else
+		this.contSemJogo = 0;
+	msg = "";
+	switch(this.contSemJogo){
+		case 5: msg = "Meu Deus Nada ainda ? Voce esta sem sorte :("; break;
+		case 10: msg ="Realmente hoje não é o seu dia hehe..."; break;
+		case 15: msg = "Ja pensou em tentar fazer outra coisa?algo mais fácil..."; break;
+		case 20: msg = "Ta bom chega...é melhos você jogar um jogo da velha, talvez você tenha mais chance de ganhar"; break;
+	}
+	// se o resto da divisão de contSemJogo por 5 for 0
+	/*if(this.contSemJogo == 5 )
+		msg = "Meu Deus Nada ainda ? Voce esta sem sorte :(";
+	else if(this.contSemJogo == 10 )
+		msg = "Realmente hoje não é o seu dia hehe...";
+	else if(this.contSemJogo == 15 )
+		msg = "Ja pensou em tentar fazer outra coisa?algo mais fácil...";
+	else if(this.contSemJogo > 0 && this.contSemJogo == 20 )
+		msg = "Ta bom chega...é melhos você jogar um jogo da velha, talvez você tenha mais chance de ganhar";*/
+	if (analisarLancamento.pontos != 0)
+		msg = "Parabéns!!!Foi merecido^^";
+
+
 	
 	
 	var resultado = {
@@ -140,6 +186,7 @@ Jogo.prototype.interacao = function(analisarLancamento){
 
 	
 }
+
 
 
 
